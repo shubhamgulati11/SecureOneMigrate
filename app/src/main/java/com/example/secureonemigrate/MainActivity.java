@@ -76,14 +76,8 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
 
-                MainActivity.this.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(MainActivity.this, "Checking if user already exists", Toast.LENGTH_SHORT).show();
-
-                    }
-                });
                 final Query applesQuery = databaseReference.orderByChild("phoneNum").equalTo(mobile);
+
                 applesQuery.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {

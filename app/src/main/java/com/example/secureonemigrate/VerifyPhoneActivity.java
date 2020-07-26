@@ -144,7 +144,8 @@ public class VerifyPhoneActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             //verification successful we will start the home activity
-                            String id = databaseReference.push().getKey();
+//                            String id = databaseReference.push().getKey();
+                            String id = mAuth.getCurrentUser().getUid();
                             employee.setName(name);
                             employee.setDesignation(designation);
                             employee.setEmpID(id);
