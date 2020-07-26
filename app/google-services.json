@@ -1,0 +1,77 @@
+{
+  "project_info": {
+    "project_number": "57908540880",
+    "firebase_url": "https://one-dc7a6.firebaseio.com",
+    "project_id": "one-dc7a6",
+    "storage_bucket": "one-dc7a6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:57908540880:android:d4c3221a6785353eadb5d5",
+        "android_client_info": {
+          "package_name": "com.example.secureone"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "57908540880-k1ii61jl1g22pi8fh41aprectlg5jbuu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.secureone",
+            "certificate_hash": "7db6536d496015617d78f69ab78fb68aa6034f7b"
+          }
+        },
+        {
+          "client_id": "57908540880-aksnarac17dijkdjd6931hq77dajsulc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCHQd1odqb24YA4VaG_-v9PDQ3uJP4RJ4U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "57908540880-aksnarac17dijkdjd6931hq77dajsulc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:57908540880:android:66f9bf6a17c77519adb5d5",
+        "android_client_info": {
+          "package_name": "com.example.secureonemigrate"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "57908540880-aksnarac17dijkdjd6931hq77dajsulc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCHQd1odqb24YA4VaG_-v9PDQ3uJP4RJ4U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "57908540880-aksnarac17dijkdjd6931hq77dajsulc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
