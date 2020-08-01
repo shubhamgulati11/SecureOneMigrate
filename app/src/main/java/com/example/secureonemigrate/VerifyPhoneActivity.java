@@ -41,7 +41,7 @@ public class VerifyPhoneActivity extends AppCompatActivity {
     //firebase auth object
     private FirebaseAuth mAuth;
     private DatabaseReference databaseReference;
-
+    private DatabaseReference rootReference;
 
     Employee employee = new Employee();
 
@@ -53,7 +53,8 @@ public class VerifyPhoneActivity extends AppCompatActivity {
         setContentView(R.layout.activity_verify_phone);
 
         mAuth = FirebaseAuth.getInstance();
-        databaseReference = FirebaseDatabase.getInstance().getReference();
+        rootReference = FirebaseDatabase.getInstance().getReference();
+        databaseReference = rootReference.child("Employee");
         editTextCode = findViewById(R.id.edtCode);
         verify = findViewById(R.id.btnVerify);
 
