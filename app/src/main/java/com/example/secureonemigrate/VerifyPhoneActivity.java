@@ -152,9 +152,10 @@ public class VerifyPhoneActivity extends AppCompatActivity {
                             employee.setEmpID(id);
                             employee.setPhoneNum(mobile);
 
-                            databaseReference.child(id).setValue(employee);
+//                            databaseReference.child(id).setValue(employee);
                             Intent intent = new Intent(VerifyPhoneActivity.this, HomeActivity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            intent.putExtra("obj",employee);
                             startActivity(intent);
                         } else {
 
