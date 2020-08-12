@@ -4,14 +4,24 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Employee implements Parcelable {
-    public Employee(String name, String designation, String empID, String phoneNum) {
+    String name;
+    String designation;
+    String empID;
+    String phoneNum;
+    String photoLink, qrLink;
+    String site;
+
+    public Employee() {
+    }
+
+    public Employee(String name, String designation, String empID, String phoneNum, String photoLink, String qrLink, String site) {
         this.name = name;
         this.designation = designation;
         this.empID = empID;
         this.phoneNum = phoneNum;
-    }
-
-    public Employee() {
+        this.photoLink = photoLink;
+        this.qrLink = qrLink;
+        this.site = site;
     }
 
     protected Employee(Parcel in) {
@@ -19,6 +29,9 @@ public class Employee implements Parcelable {
         designation = in.readString();
         empID = in.readString();
         phoneNum = in.readString();
+        photoLink = in.readString();
+        qrLink = in.readString();
+        site = in.readString();
     }
 
     public static final Creator<Employee> CREATOR = new Creator<Employee>() {
@@ -65,13 +78,28 @@ public class Employee implements Parcelable {
         this.phoneNum = phoneNum;
     }
 
-    String name;
-    String designation;
-    String empID;
-    String phoneNum;
+    public String getPhotoLink() {
+        return photoLink;
+    }
 
-    public String toString(){
-        return "{name:"+name+",designation:"+designation+",empID:"+empID+",phoneNum:"+phoneNum+"}";
+    public void setPhotoLink(String photoLink) {
+        this.photoLink = photoLink;
+    }
+
+    public String getQrLink() {
+        return qrLink;
+    }
+
+    public void setQrLink(String qrLink) {
+        this.qrLink = qrLink;
+    }
+
+    public String getSite() {
+        return site;
+    }
+
+    public void setSite(String site) {
+        this.site = site;
     }
 
     @Override
@@ -85,6 +113,9 @@ public class Employee implements Parcelable {
         parcel.writeString(designation);
         parcel.writeString(empID);
         parcel.writeString(phoneNum);
+        parcel.writeString(photoLink);
+        parcel.writeString(qrLink);
+        parcel.writeString(site);
     }
 }
 

@@ -26,15 +26,17 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity {
 
-    private FirebaseAuth mAuth;
+    FirebaseAuth mAuth;
     EditText phone_num,emp_designation,emp_name;
     Button send_otp;
     DatabaseReference databaseReference;
     int pehleSeHai;
+    CountDownLatch ct;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,13 +48,14 @@ public class MainActivity extends AppCompatActivity {
         emp_designation = findViewById(R.id.pDes);
         phone_num = findViewById(R.id.pNum);
         pehleSeHai = 0;
+        ct = new CountDownLatch(1);
 
         databaseReference = FirebaseDatabase.getInstance().getReference();
 
         send_otp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String name = emp_name.getText().toString().trim();
+                String name = emp_name.getText().toString().toLowerCase().trim();
                 String designation = emp_designation.getText().toString().trim();
                 final String mobile = phone_num.getText().toString().trim();
 
@@ -67,8 +70,6 @@ public class MainActivity extends AppCompatActivity {
                     emp_designation.requestFocus();
                     return;
                 }
-
-
 
                 if(mobile.isEmpty() || mobile.length() < 10){
                     phone_num.setError("Enter a valid mobile");
@@ -92,7 +93,15 @@ public class MainActivity extends AppCompatActivity {
                     public void onCancelled(@NonNull DatabaseError error) {
 
                     }
+
                 });
+
+//                try {
+//                    ct.await();
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+
 
                 if(pehleSeHai == 0) {
                     Intent intent = new Intent(MainActivity.this, VerifyPhoneActivity.class);
@@ -107,5 +116,38 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+    private void mCheckInforServer(String child){
+        mReadDataOnce(child, new OnGetDataListener() {
+            @Override
+            public void onStart() {
+                //DO SOME THING WHEN START GET DATA HERE
+            }
 
-}
+            @Override
+            public void onFailure(DatabaseError error) {
+
+            }
+
+            @Override
+            public void onSuccess(DataSnapshot data) {
+                //DO SOME THING WHEN GET DATA SUCCESS HERE
+            }
+
+        });
+    }
+    public void mReadDataOnce(String child, final OnGetDataListener listener) {
+        listener.onStart();
+        FirebaseDatabase.getInstance().getReference().child(child).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                listener.onSuccess(dataSnapshot);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                listener.onFailure(databaseError);
+            }
+        });
+    }
+
+    }
