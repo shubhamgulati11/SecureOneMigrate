@@ -3,6 +3,7 @@ package com.example.secureonemigrate;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -50,6 +51,7 @@ public class HomeActivity extends AppCompatActivity {
     ImageView iv;
     public Uri imguri;
     Employee obj;
+
     StorageReference storageReference;
     Uri downloadUri;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -65,9 +67,14 @@ public class HomeActivity extends AppCompatActivity {
         next_user.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mAuth.signOut();
-                startActivity(new Intent(HomeActivity.this, MainActivity.class));
-                finish();
+                if(flag==2) {
+                    mAuth.signOut();
+                    startActivity(new Intent(HomeActivity.this, MainActivity.class));
+                    finish();
+                }
+                else{
+                    Toast.makeText(HomeActivity.this, "Please upload a photo first!", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -81,7 +88,7 @@ public class HomeActivity extends AppCompatActivity {
         Bitmap bitmap=GetBitmap();
         Uri qruri=getImageUri(this,bitmap);
         Log.e("TAG QR URI",""+qruri);
-        iv.setImageURI(qruri);
+//        iv.setImageURI(qruri);
 //        obj.setQrLink(qruri.toString());
         FileUploader(qruri);
 
@@ -126,6 +133,7 @@ public class HomeActivity extends AppCompatActivity {
     //intent to get image
     //in manifest add permission
     private void Filechooser() {
+
         Intent i=new Intent();
         i.setType("image/*");
         i.setAction(Intent.ACTION_GET_CONTENT);
@@ -153,7 +161,7 @@ public class HomeActivity extends AppCompatActivity {
     private void FileUploader(Uri link) {
 
         if(link==null){
-            Toast.makeText(this,"NULL",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"Please select a photo!",Toast.LENGTH_SHORT).show();
         }else{
             StorageReference ref=null;
             if(flag==0) {
@@ -209,11 +217,13 @@ public class HomeActivity extends AppCompatActivity {
                         else if(flag==1) {
                             obj.setPhotoLink(downloadUri.toString());
                             myRef.child(obj.getEmpID()).setValue(obj);
+                            flag=2;
                         }
 //                    myRef.setValue(downloadUri.toString());
                     } else {
                         // Handle failures
                         // ...
+                        Toast.makeText(HomeActivity.this, "Retry..", Toast.LENGTH_SHORT).show();
                     }
                 }
             });

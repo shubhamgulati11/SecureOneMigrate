@@ -77,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
 
+
                 final Query applesQuery = databaseReference.orderByChild("phoneNum").equalTo(mobile);
 
                 applesQuery.addListenerForSingleValueEvent(new ValueEventListener() {
